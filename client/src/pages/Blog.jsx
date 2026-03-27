@@ -12,7 +12,7 @@ const Blog = () => {
 
   const { id } = useParams()
 
-  const {axios} = useAppContext()
+  const { axios } = useAppContext()
 
   const [data, setData] = useState(null)
   const [comments, setComments] = useState([])
@@ -21,7 +21,7 @@ const Blog = () => {
 
   const fetchBlogData = async () => {
     try {
-      const {data} = await axios.get(`/api/blog/${id}`)
+      const { data } = await axios.get(`/api/blog/${id}`)
       data.success ? setData(data.blog) : toast.error(data.message)
     } catch (error) {
       toast.error(error.message)
@@ -30,10 +30,10 @@ const Blog = () => {
 
   const fetchComments = async () => {
     try {
-      const { data } = await axios.post(`/api/blog/comments`, {blogId: id})
-      if (data.success){
+      const { data } = await axios.post(`/api/blog/comments`, { blogId: id })
+      if (data.success) {
         setComments(data.comments)
-      }else{
+      } else {
         toast.error(data.message);
       }
     } catch (error) {
@@ -44,12 +44,12 @@ const Blog = () => {
   const addComment = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`/api/blog/add-comment`, {blog: id, name, content});
-      if (data.success){
+      const { data } = await axios.post(`/api/blog/add-comment`, { blog: id, name, content });
+      if (data.success) {
         toast.success(data.message)
         setName('')
         setContent('')
-      }else{
+      } else {
         toast.error(data.message);
       }
     } catch (error) {
@@ -112,18 +112,18 @@ const Blog = () => {
 
         {/* Share Buttons */}
         <div className='my-24 max-w-3xl mx-auto'>
-            <p className='font-semibold my-4'>Share this article on social media</p>
-            <div className='flex'>
-              <img src={assets.facebook_icon} width={50} alt="" />
-              <img src={assets.twitter_icon} width={50} alt="" />
-              <img src={assets.googleplus_icon} width={50} alt="" />
-            </div>
+          <p className='font-semibold my-4'>Share this article on social media</p>
+          <div className='flex'>
+            <img src={assets.facebook_icon} width={50} alt="" />
+            <img src={assets.twitter_icon} width={50} alt="" />
+            <img src={assets.googleplus_icon} width={50} alt="" />
+          </div>
         </div>
       </div>
       <Footer />
 
     </div>
-  ) : <Loader/>
+  ) : <Loader />
 }
 
 export default Blog

@@ -8,8 +8,8 @@ import Footer from '../components/Footer'
 const Home = () => {
   return (
     <>
-      <Navbar/>
-      <Header/>
+      <Navbar />
+      <Header />
       <BlogList />
       <NewsLetter />
       <Footer />

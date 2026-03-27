@@ -72,7 +72,7 @@ export const deleteBlogById = async (req, res) => {
         await Blog.findByIdAndDelete(id);
 
         // Delete all comments associated with the blog
-        await Comment.deleteMany({blog: id});
+        await Comment.deleteMany({ blog: id });
 
         res.json({ success: true, message: 'Blog deleted successfully' })
     } catch (error) {
@@ -94,32 +94,32 @@ export const togglePublish = async (req, res) => {
 }
 
 
-export const addComment = async (req, res) =>{
+export const addComment = async (req, res) => {
     try {
         const { blog, name, content } = req.body;
-        await Comment.create({blog, name, content});
-        res.json({success: true, message: 'Comment added for review'})
+        await Comment.create({ blog, name, content });
+        res.json({ success: true, message: 'Comment added for review' })
     } catch (error) {
         res.json({ success: false, message: error.message })
     }
 }
 
-export const getBlogComments = async (req, res) =>{
+export const getBlogComments = async (req, res) => {
     try {
-       const { blogId } = req.body; 
-       const comments = await Comment.find({blog: blogId, isApproved: true}).sort({createdAt: -1});
-       res.json({success: true, comments})
+        const { blogId } = req.body;
+        const comments = await Comment.find({ blog: blogId, isApproved: true }).sort({ createdAt: -1 });
+        res.json({ success: true, comments })
     } catch (error) {
         res.json({ success: false, message: error.message })
     }
 }
 
-export const generateContent = async (req, res)=>{
+export const generateContent = async (req, res) => {
     try {
-        const {prompt} = req.body;
+        const { prompt } = req.body;
         const content = await main(prompt + ' Generate a blog content for this topic in simple text format')
-        res.json({success: true, content})
+        res.json({ success: true, content })
     } catch (error) {
-        res.json({success: false, message: error.message })
+        res.json({ success: false, message: error.message })
     }
 }

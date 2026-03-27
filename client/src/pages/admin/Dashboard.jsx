@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     const fetchDashboard = async () => {
         try {
-            const {data} = await axios.get('/api/admin/dashboard')
+            const { data } = await axios.get('/api/admin/dashboard')
             data.success ? setDashboardData(data.dashboardData) : toast.error(data.message)
         } catch (error) {
             toast.error(error.message)
@@ -76,8 +76,8 @@ const Dashboard = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {dashboardData.recentBlogs.map((blog, index)=>{
-                                return <BlogTableItem key={blog._id} blog={blog} fetchBlogs={fetchDashboard} index={index + 1}/>
+                            {dashboardData.recentBlogs.map((blog, index) => {
+                                return <BlogTableItem key={blog._id} blog={blog} fetchBlogs={fetchDashboard} index={index + 1} />
                             })}
                         </tbody>
                     </table>

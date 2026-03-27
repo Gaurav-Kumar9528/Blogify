@@ -12,14 +12,14 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post('/api/admin/login', {email, password})
+            const { data } = await axios.post('/api/admin/login', { email, password })
 
-            if(data.success){
+            if (data.success) {
                 setToken(data.token)
                 localStorage.setItem('token', data.token)
                 axios.defaults.headers.common['Authorization'] = data.token;
             }
-            else{
+            else {
                 toast.error(data.message)
             }
         } catch (error) {
